@@ -1,11 +1,16 @@
 const mongoose = require("mongoose");
 const arrayOfColors = [
-  "orange",
   "blue",
+  "green",
+  "yellow",
+  "orange",
+  "lightblue",
+  "lightcyan",
   "red",
   "lightgreen",
-  "lightblue",
-  "yellow",
+  "lightorange",
+  "lightred",
+  "lightyellow",
 ];
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -30,7 +35,7 @@ const userSchema = new mongoose.Schema({
   iconColor: {
     type: String,
     default: () => {
-      return arrayOfColors[Math.random(0, 1)];
+      return arrayOfColors[Math.round(Math.random() * 10)];
     },
   },
   memberSince: {
