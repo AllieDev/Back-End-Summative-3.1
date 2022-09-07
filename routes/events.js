@@ -43,6 +43,13 @@ router.get("/hosted", authorise(), async (req, res) => {
 // --------------------------------------------------------------------
 
 // Laurindo - GET ENDPOINT WITH ID ------------------------------------
+router.get("/:id", getSpecificEventData, async (req, res) => {
+  try {
+    res.status(200).json(res.eventData.toObject());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 // --------------------------------------------------------------------
 
 // POST EVENT ENDPOINT --------------------------------------------------------
