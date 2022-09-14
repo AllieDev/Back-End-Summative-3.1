@@ -16,10 +16,9 @@ const eventsSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
   },
-  imageUrl: {
-    type: String,
-    default:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fm=jpg&ixid=Mnw3MjAxN3wwfDF8c2VhcmNofDN8fGV2ZW50fGVufDB8MHx8fDE2NjI0Mjg0MTA&ixlib=rb-1.2.1&q=80&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450",
+  imageFile: {
+    data: Buffer,
+    contentType: String,
   },
   title: {
     type: String,
