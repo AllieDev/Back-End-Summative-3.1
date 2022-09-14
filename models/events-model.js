@@ -16,6 +16,10 @@ const eventsSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
   },
+  imageFile: {
+    data: Buffer,
+    contentType: String,
+  },
   title: {
     type: String,
     required: true,
