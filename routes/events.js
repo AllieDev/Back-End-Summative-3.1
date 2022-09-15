@@ -8,6 +8,21 @@ const secretKey = "809fad9sffa0dsfj0das";
 // --------------------------------------------------------------------
 
 // SeoJeonge GET ALL EVENT LIST ---------------------------------------
+router.get("/", async (req, res) => {
+  try {
+    eventModel
+      .find({}, (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          res.json(results);
+        }
+      })
+      .lean();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 // --------------------------------------------------------------------
 
 // GET All of User's to attend Events ------------------------------------
