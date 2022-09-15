@@ -7,7 +7,7 @@ const userModel = require("../models/users-model.js");
 const secretKey = "809fad9sffa0dsfj0das";
 // --------------------------------------------------------------------
 
-// SeoJeonge GET ALL EVENT LIST ---------------------------------------
+// Seojeong GET ALL EVENT LIST ---------------------------------------
 router.get("/", async (req, res) => {
   try {
     eventModel
