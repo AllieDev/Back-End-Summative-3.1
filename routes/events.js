@@ -43,13 +43,41 @@ router.get("/", async (req, res) => {
 // --------------------------------------------------------------------
 
 // Laurindo - GET ENDPOINT WITH ID ------------------------------------
+
 router.get("/:id", getSpecificEventData, async (req, res) => {
   try {
-    res.status(200).json(res.eventData.toObject());
+    const hostInfo = await userModel.findById(res.eventData.hostId);
+
+    let commentatorsInfo = [];
+    for (let commentInfo of res.eventData.comments) {
+      const commentator = await userModel.findById(commentInfo.id);
+      const commentsInfo = {
+        id: commentInfo.id,
+        comment: commentInfo.comment,
+        commentator: commentator,
+      };
+      commentatorsInfo.push(commentsInfo);
+    }
+
+    let attendeesInfo = [];
+
+    for (let attendee of res.eventData.attendeesId) {
+      const attendeeInfo = await userModel.findById(attendee);
+      attendeesInfo.push(attendeeInfo);
+    }
+
+    const eventsData = {
+      hostInfo: hostInfo,
+      attendeesInfo: attendeesInfo,
+      commentsInfo: commentatorsInfo,
+    };
+
+    res.status(200).json(eventsData);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
 // --------------------------------------------------------------------
 
 // POST EVENT ENDPOINT --------------------------------------------------------
