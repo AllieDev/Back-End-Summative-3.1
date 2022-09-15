@@ -24,7 +24,7 @@ const upload = multer({
   limits: { fileSize: 5242880 },
 });
 
-// SeoJeonge GET ALL EVENT LIST ---------------------------------------
+// Seojeong GET ALL EVENT LIST ---------------------------------------
 router.get("/", async (req, res) => {
   try {
     eventModel
