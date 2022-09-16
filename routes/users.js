@@ -68,19 +68,19 @@ router.post("/sign-up", async (req, res) => {
 // --------------------------------------------------------------------
 
 // UPDATE -------------------------------------------------------------
-router.patch("/", getAuthUser, async (req, res) => {
+router.patch("/", authorise(), getAuthUser, async (req, res) => {
   try {
-    if (req.body.name != null) {
-      res.user.name = req.body.name;
+    if (req.body.firstName != null) {
+      res.user.firstName = req.body.firstName;
     }
-    if (req.body.password != null) {
-      res.user.password = req.body.password;
+    if (req.body.lastName != null) {
+      res.user.lastName = req.body.lastName;
     }
     if (req.body.about != null) {
       res.user.about = req.body.about;
     }
     const newUserDetail = await res.user.save();
-    res.json(newUserDetail);
+    res.status(200).json(newUserDetail);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
