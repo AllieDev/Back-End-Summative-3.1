@@ -83,7 +83,7 @@ router.get("/:id", getSpecificEventData, async (req, res) => {
 // POST EVENT ENDPOINT --------------------------------------------------------
 router.post("/", authorise(), upload.single("image"), async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const isValidUser = await userModel.exists({ _id: req.auth.userId });
     if (isValidUser) {
       if (req.file) {
@@ -177,8 +177,8 @@ router.patch(
   async (req, res) => {
     try {
       if (req.auth.userId === res.eventData.hostId.toString()) {
-        if (req.body.imageUrl != null) {
-          res.eventData.imageUrl = req.body.imageUrl;
+        if (req.body.location != null) {
+          res.eventData.location = req.body.location;
         }
         if (req.body.title != null) {
           res.eventData.title = req.body.title;
@@ -196,7 +196,7 @@ router.patch(
         const newEventDetail = await res.eventData
           .save()
           .then((data) => data.toObject());
-        res.status(200).json(newEventDetail);
+        res.status(200).json(newEventDetail._id);
       } else {
         res
           .status(403)
@@ -219,7 +219,7 @@ router.patch("/:id", authorise(), getSpecificEventData, async (req, res) => {
     const newEventDetail = await res.eventData
       .save()
       .then((data) => data.toObject());
-    res.json(newEventDetail.comments);
+    res.json(req.params.id);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
