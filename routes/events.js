@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          res.json(results);
+          res.json(results.reverse());
         }
       })
       .lean();
