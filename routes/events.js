@@ -144,17 +144,22 @@ router.patch(
     try {
       let isAlreadyAttending;
       for (let attendeeId of res.eventData.attendeesId) {
+        // console.log(attendeeId.toString(),req.auth.userId)
         if (req.auth.userId == attendeeId.toString()) {
+          
           // if the attendee is already being attended then don't save id in attendeesId list
           isAlreadyAttending = true;
         } else {
           isAlreadyAttending = false;
-        }
+        } 
+        console.log(isAlreadyAttending)
       }
       if (isAlreadyAttending) {
-        await eventModel.findOneAndUpdate({
+        // console.log(req.auth.userId);
+        await eventModel.findByIdAndUpdate(req.params.id, {
           $pull: { attendeesId: req.auth.userId },
         });
+        // console.log(data)
         res.status(200).json({ message: "You have unattended this event" });
       } else {
         res.eventData.attendeesId.push(req.auth.userId);
