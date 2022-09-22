@@ -59,7 +59,9 @@ router.post("/sign-up", async (req, res) => {
       });
       // 201 = successfully created something
       const newUser = await userData.save();
-      res.status(201).json(newUser);
+      res
+        .status(201)
+        .json({ message: "You have successfully created an acount!" });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }

@@ -69,7 +69,7 @@ router.get("/:id", getSpecificEventData, async (req, res) => {
     const eventsData = {
       hostInfo: hostInfo,
       attendeesInfo: attendeesInfo,
-      commentsInfo: commentatorsInfo,
+      commentsInfo: commentatorsInfo.reverse(),
     };
 
     res.status(200).json(eventsData);
@@ -146,13 +146,12 @@ router.patch(
       for (let attendeeId of res.eventData.attendeesId) {
         // console.log(attendeeId.toString(),req.auth.userId)
         if (req.auth.userId == attendeeId.toString()) {
-          
           // if the attendee is already being attended then don't save id in attendeesId list
           isAlreadyAttending = true;
         } else {
           isAlreadyAttending = false;
-        } 
-        console.log(isAlreadyAttending)
+        }
+        console.log(isAlreadyAttending);
       }
       if (isAlreadyAttending) {
         // console.log(req.auth.userId);
